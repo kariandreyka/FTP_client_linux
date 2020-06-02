@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QMessageBox"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,7 +22,9 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::init(){
-    controller->connect(this->login->getIP(), this->login->getPassword());
+    if(!controller->connect(this->login->getIP(), this->login->getPassword())){
+        QMessageBox::warning(this, "Error", "Connection error");
+    }
     login->hide();
     this->show();
 }

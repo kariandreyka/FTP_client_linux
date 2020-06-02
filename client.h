@@ -27,20 +27,22 @@ private:
     int port;
     int sock;
     char buffer[100];
-    char *file;
-    std::string LoginPassword;
-    int    StatusCode;//cur
     void clearBuffer();
+    std::string loginPassword;
+    char *file;
 
 public:
+    QString path;
+    QString fileName;
+
+
     bool InitConnect(QString ip, int port, QString pass);
     int getSocket(){ return this->sock; }
 
-public:
     void Exec_PASS(QString pass);
     std::vector<std::string> Exec_ls();
     void Exec_get(QString path, QString fileName);
-    void Exec_PWD();
+
     void Exec_cd(QString dirName);
     void Exec_qiut();
 

@@ -15,7 +15,8 @@ private:
     FileListModel *model;
 public:
     Controller();
-    void connect(const QString &login, const QString &pass);
+    bool connect(const QString &login, const QString &pass);
+    QString getMessage(){ client->Message; }
     ~Controller();
     FileListModel* getModel(){ return model; }
 };

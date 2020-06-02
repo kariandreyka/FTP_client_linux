@@ -17,7 +17,7 @@ Client::Client()
 bool Client::InitConnect(QString _ip, int _port, QString pass)
 {
 
-    this->LoginPassword = pass.toUtf8().constData();
+    this->loginPassword = pass.toUtf8().constData();
     this->sock = socket(AF_INET, SOCK_STREAM, 0);
     this->server.sin_family = AF_INET;
     this->server.sin_port = htons(1304);
@@ -25,7 +25,8 @@ bool Client::InitConnect(QString _ip, int _port, QString pass)
     int k = connect(sock,(struct sockaddr*)&server, sizeof(server));
     if(k == -1)
       {
-        qDebug() << "can't connect socket";
+        this->Message ="Server error";
+
         return false;
       }
     Exec_PASS(pass);
@@ -70,7 +71,7 @@ std::vector<std::string> Client::Exec_ls(){
 void Client::Exec_get(QString path, QString fileName){
     this->clearBuffer();
     this->path = path;
-    this->name = fileName;
+    this->fileName = fileName;
     std::strcpy(this->buffer, "get ");
     std::strcat(this->buffer, std::string(fileName.toUtf8().constData()).c_str());
     send(this->sock, this->buffer, 100, 0);

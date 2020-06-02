@@ -1,4 +1,5 @@
 #include "controller.h"
+#include <QMessageBox>
 
 Controller::Controller()
 {
@@ -6,11 +7,10 @@ Controller::Controller()
     this->model = new FileListModel();
 }
 
-void Controller::connect(const QString &login, const QString &pass){
+bool Controller::connect(const QString &login, const QString &pass){
     int sucsess = this->client->InitConnect(login, 1304, pass);
     if(!sucsess){
-        qDebug() << "connection error";
-        return;
+        return false;
     }
     std::vector<std::string> fileList = this->client->Exec_ls();
     foreach (std::string file, fileList) {
@@ -18,6 +18,7 @@ void Controller::connect(const QString &login, const QString &pass){
     }
     this->model->setFileList(fileList);
     this->client->Exec_qiut();
+    return true;
 }
 
 Controller::~Controller(){
