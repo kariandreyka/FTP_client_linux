@@ -8,7 +8,6 @@ class FileListModel : QStandardItemModel
 {
     Q_OBJECT
 private:
-    QList<QStandardItem*> Files;
     QString folderIcon = ":images/folder.png";
     QString fileIcon = ":images/file.jpeg";
 public:
