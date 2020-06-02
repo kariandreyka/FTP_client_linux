@@ -27,9 +27,6 @@ private:
     int port;
     int sock;
     char buffer[100];
-    char *file;
-    std::string LoginPassword;
-    int    StatusCode;//cur
     void clearBuffer();
 
 public:
